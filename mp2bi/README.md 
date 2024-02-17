@@ -23,7 +23,7 @@ python -m venv venv
 deactivate
 
 ### når man har miljøet startet skal man sørge for at installere dependencies 
-´´´
+
 pip install streamlit
 pip install pandas
 pip install seaborn
@@ -31,12 +31,11 @@ pip install matplotlib
 pip install numpy
 pip install scikit-learn
 
-´´´
 
 ### herefter skriver man: 
-´´´
+
 streamlit run app.py 
-´´´
+
 ### i sin terminal - så kører appen i browseren 
 
 
