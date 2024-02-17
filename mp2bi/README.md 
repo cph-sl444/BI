@@ -1,4 +1,35 @@
 # MP2
 
-THis repo contains mp2 
+THis folder contains mp2 
+
+### Start virtuelt miljø på mac, man skal være i terminalen inde i projektmappen(fx vscode terminalen):
+
+python3 -m venv venv
+
+### aktiver miljøet:
+source venv/bin/activate
+
+### deaktiver miljøet:
+deactivate
+
+### til windows:
+
+python -m venv venv
+
+### start miljøet:
+.\venv\Scripts\activate
+
+### deaktiver miljøet: 
+deactivate
+
+### når man har miljøet startet skal man sørge for at installere dependencies 
+
+### herefter skriver man: 
+´´´
+streamlit run app.py 
+´´´
+### i sin terminal - så kører appen i browseren 
+
+
+
 
