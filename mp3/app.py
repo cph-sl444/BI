@@ -3,7 +3,7 @@ import pandas as pd
 
 def load_data(file_path, label):
     # Load the Excel file, setting the second row (index 1) as the header
-    df = pd.read_csv(file_path, header=1)
+    df = pd.read_csv(file_path, header=0)
     return df
 
 def main():
