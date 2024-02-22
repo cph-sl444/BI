@@ -7,7 +7,7 @@ def load_data(file_path, label):
     return df
 
 def main():
-    st.title('Prediction by regression')
+    st.title('Mini Project 3 - Prediction by regression')
     # Specify the file paths (adjust these paths if your files are in a different directory)
     file_path = 'house-data.csv'
     load_data(file_path, 'House Data')
