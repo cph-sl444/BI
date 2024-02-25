@@ -37,9 +37,20 @@ def main():
     # Display the plot with Streamlit
     st.pyplot(fig)
 
-    st.write("Distribution of House Prices by Number of Bedrooms:")
-    # Display the distribution of house prices by number of bedrooms
-    st.line_chart(data.groupby('bedrooms')['price'].mean())
+    # Group data by number of bedrooms and calculate the average price
+    bedroom_price_distribution = data.groupby('bedrooms')['price'].mean()
+
+    # Plotting
+    fig, ax = plt.subplots()
+    bedroom_price_distribution.plot(kind='line', ax=ax, linestyle='-')
+    ax.set_title('Average House Prices by Number of Bedrooms')
+    ax.set_xlabel('Number of Bedrooms')
+    ax.set_ylabel('Average Price')
+
+    # Display the plot with Streamlit
+    st.pyplot(fig)
+
+
 
 if __name__ == "__main__":
     main()
