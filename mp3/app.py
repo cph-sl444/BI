@@ -91,7 +91,7 @@ def main():
 
     st.divider()
 
-    st.subheader('Linear Regression')
+    st.subheader('Linear Regression Model Training and Prediction using PCA Components 1-4 and Price as Target Variable')
 
     # Use the first 4 principal components to predict the price
     # Split the data into training and testing sets
@@ -129,6 +129,9 @@ def main():
     ax.set_ylabel('Predicted')
     ax.set_title('Actual vs Predicted')
     st.pyplot(fig)
+
+    st.divider()
+
 
 if __name__ == "__main__":
     main()
