@@ -5,6 +5,8 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 import numpy as np
 import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 
 def load_data(file_path, label):
     # Load the CSV file, assuming header is in the first row (index 0)
@@ -68,6 +70,10 @@ def main():
     # Assuming 'price' is your target variable, exclude it from PCA
     features = data.drop(columns=['price'])
     pca, data_scaled = apply_pca(features)
+
+    st.divider()
+
+    st.subheader('PCA')
     
     # Correct the plot to dynamically match the number of PCA components
     n_components = pca.n_components_
@@ -78,19 +84,51 @@ def main():
     ax.set_title('PCA Explained Variance Ratio')
     st.pyplot(fig)
     
-    # Update this part of your app to include PCA results visualization
-    # And further analysis or processing as needed
-    
-    # Selecting components based on explained variance
-    cumulative_variance = pca.explained_variance_ratio_.cumsum()
-    n_important_components = (cumulative_variance < 0.95).sum() + 1  # for example, retain 95% of the variance
-    
-    # Transform data to n_important_components dimensions
-    pca_reduced = PCA(n_components=n_important_components)
-    data_reduced = pca_reduced.fit_transform(data_scaled)
-    
-    # Continue with your regression analysis using data_reduced
-  
+    # Make new dataframe that has the first 4 principal components
+    st.write('First 4 principal components')
+    pca_df = pd.DataFrame(pca.transform(data_scaled)[:, :4], columns=[f'PC{i}' for i in range(1, 5)])
+    st.write(pca_df)
+
+    st.divider()
+
+    st.subheader('Linear Regression')
+
+    # Use the first 4 principal components to predict the price
+    # Split the data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(pca_df, data['price'], test_size=0.2, random_state=42)
+
+    # Train a linear regression model
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+
+    # Make predictions
+    y_pred = model.predict(X_test)
+
+    # Display the first 5 predictions using the first 4 principal components
+    st.write('First 5 predictions')
+    st.write(np.round(y_pred[:5], 2))
+
+    # Display the first 5 actual values
+    st.write('First 5 actual values')
+    st.write(np.round(y_test[:5], 2))
+        
+    # Display the R-squared score
+    r2_score = model.score(X_test, y_test)
+    st.write('R-squared score')
+    st.write(round(r2_score, 2))
+
+    # Display the coefficients
+    st.write('Coefficients')
+    st.write(np.round(model.coef_, 2))
+
+    # visualize the actual vs predicted values using a scatter plot
+    fig, ax = plt.subplots()
+    ax.scatter(y_test, y_pred)
+    ax.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'k--', lw=4)
+    ax.set_xlabel('Actual')
+    ax.set_ylabel('Predicted')
+    ax.set_title('Actual vs Predicted')
+    st.pyplot(fig)
 
 if __name__ == "__main__":
     main()
