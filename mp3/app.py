@@ -152,6 +152,5 @@ def main():
     st.title('House Price Predictor')
     st.write('The predicted price for the house is: $', round(predicted_price[0], 2))
 
-
 if __name__ == "__main__":
     main()
