@@ -134,23 +134,23 @@ def main():
 
 
     # Data preprocessing and model training
-X = data[['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'yr_built', 'yr_renovated', 'zipcode', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'waterfront', 'view']]
-y = data['price']
+    X = data[['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'yr_built', 'yr_renovated', 'zipcode', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'waterfront', 'view']]
+    y = data['price']
 
-# Train-test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    # Train-test split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Model training
-model = LinearRegression()
-model.fit(X_train, y_train)
+    # Model training
+    model = LinearRegression()
+    model.fit(X_train, y_train)
 
-# Prediction
-input_data = [[bedrooms, bathrooms, sqft_living, sqft_lot, floors, yr_built, yr_renovated, zipcode, condition, grade, sqft_above, sqft_basement, waterfront, view]]
-predicted_price = model.predict(input_data)
+    # Prediction
+    input_data = data[['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'floors', 'yr_built', 'yr_renovated', 'zipcode', 'condition', 'grade', 'sqft_above', 'sqft_basement', 'waterfront', 'view']]
+    predicted_price = model.predict(input_data)
 
-# Display predicted price
-st.title('House Price Predictor')
-st.write('The predicted price for the house is: $', round(predicted_price[0], 2))
+    # Display predicted price
+    st.title('House Price Predictor')
+    st.write('The predicted price for the house is: $', round(predicted_price[0], 2))
 
 
 if __name__ == "__main__":
