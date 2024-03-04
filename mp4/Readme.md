@@ -1,8 +1,8 @@
-# Which machine learning methods did you choose to apply in the application?
+### Which machine learning methods did you choose to apply in the application?
 - Desicion Tree Classifier
 - Naïve Bayes Classifer 
 
-# How accurate is your solution of prediction?
+### How accurate is your solution of prediction?
 - Precision for "No" class: 0.91 (91%)
 - Precision for "Yes" class: 0.28 (28%)s
 
@@ -18,7 +18,7 @@
 The overall accuracy of the model is 0.78 (78%), which means that approximately 78% of the predictions made by the model are correct.
 
 
-# Which were the challenges in the project development?
+### Which were the challenges in the project development?
  
  
  
