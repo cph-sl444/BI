@@ -10,8 +10,6 @@ from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, classification_report, silhouette_score
 from sklearn.cluster import KMeans
-from scipy.spatial.distance import cdist
-
 
 
 ## 1. Data wrangling and exploration
@@ -174,10 +172,20 @@ def main():
     legend1 = ax.legend(*scatter.legend_elements(), title="Clusters")
     ax.add_artist(legend1)
     st.pyplot(fig)
-   
 
-    # plot clusters using boundraies and steps and cluster centers 
-    
+    # Apply K-Means clustering
+    n_clusters = st.slider('Select number of clusters', min_value=2, max_value=10, value=2, step=1)
+    kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+    cluster_labels = kmeans.fit_predict(X_scaled)
+
+    # Visualize the clusters (assuming 2D visualization)
+    st.subheader('Clustering Visualization')
+    plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c=cluster_labels, cmap='viridis')
+    plt.xlabel(relevant_features[0])
+    plt.ylabel(relevant_features[5])
+    plt.title('K-Means Clustering of Employees')
+    plt.colorbar(label='Cluster')
+    st.pyplot()
 
 if __name__ == "__main__":
     main()
